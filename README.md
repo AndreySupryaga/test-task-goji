@@ -2,6 +2,10 @@
 
 A grocery list application built with Angular 21, NgRx, Angular Material, Transloco, JSON-server, and Vitest.
 
+## Live Project
+
+**The deployed project is available here: [https://test-task-goji.vercel.app/](https://test-task-goji.vercel.app/)**
+
 ## Tech Stack
 
 | Concern | Technology |
