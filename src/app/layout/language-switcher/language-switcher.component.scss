@@ -1,6 +1,6 @@
 .lang-flag {
   font-size: var(--font-size-lg);
-  margin-right: 0.25rem;
+  margin-right: var(--space-1)
 }
 
 .lang-code {
@@ -16,7 +16,7 @@
 }
 
 button[mat-menu-item] {
-  gap: 0.5rem;
+  gap: var(--space-2);
 
   &.active {
     font-weight: 600;

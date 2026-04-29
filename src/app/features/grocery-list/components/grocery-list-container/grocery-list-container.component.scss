@@ -92,7 +92,7 @@
 }
 
 .slide-down {
-  animation: slide-down 400ms;
+  animation: slide-down var(--transition-slow);
 }
 
 @keyframes slide-down {
