@@ -1,2 +1,4 @@
-export const API_BASE = 'http://localhost:3000';
+import { environment } from '@environments/environment';
+
+export const API_BASE = environment.apiBaseUrl;
 export const GROCERY_ITEMS_ENDPOINT = 'items';

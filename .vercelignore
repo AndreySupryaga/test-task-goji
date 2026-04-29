@@ -1,0 +1,10 @@
+node_modules
+.git
+.vscode
+.idea
+.angular
+coverage
+dist
+*.log
+.DS_Store
+README.md
