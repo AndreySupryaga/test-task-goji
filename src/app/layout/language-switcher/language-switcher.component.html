@@ -1,0 +1,25 @@
+<button
+  mat-button
+  [matMenuTriggerFor]="langMenu"
+  [attr.aria-label]="'language.select' | transloco"
+
+>
+  <div class="lang-select-button">
+    <span class="lang-flag" aria-hidden="true">{{ currentLang()?.flag }}</span>
+    <span>{{ currentLang()?.code | uppercase }}</span>
+    <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+  </div>
+</button>
+
+<mat-menu #langMenu="matMenu">
+  @for (lang of languages; track lang.code) {
+    <button
+      mat-menu-item
+      [class.active]="lang.code === languageService.activeLang()"
+      (click)="selectLanguage(lang.code)"
+    >
+      <span class="lang-flag" aria-hidden="true">{{ lang.flag }}</span>
+      <span>{{ lang.label }}</span>
+    </button>
+  }
+</mat-menu>

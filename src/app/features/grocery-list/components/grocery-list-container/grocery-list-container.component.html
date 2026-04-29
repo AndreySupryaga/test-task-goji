@@ -1,0 +1,77 @@
+<section class="grocery-list" aria-label="Grocery list">
+  <div class="grocery-list__header">
+    <div class="grocery-list__meta">
+      <h1 class="grocery-list__title">{{ 'grocery.title' | transloco }}</h1>
+      @if (totalCount() > 0) {
+        <p class="grocery-list__progress" aria-live="polite">
+          @if (boughtCount() === totalCount()) {
+            {{ 'grocery.allDone' | transloco }}
+          } @else {
+            {{'grocery.progress' | transloco: { bought: boughtCount(), total: totalCount() } }}
+          }
+        </p>
+      }
+    </div>
+
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="loading()"
+      (click)="onOpenAddForm()"
+    >
+      <mat-icon>add</mat-icon>
+      {{ 'grocery.addItem' | transloco }}
+    </button>
+  </div>
+
+  @if (loading()) {
+    <app-loader />
+  } @else if (error()) {
+    <div class="grocery-list__error" role="alert">
+      <p>{{ error() }}</p>
+      <button mat-stroked-button (click)="onRetryLoad()">
+        <mat-icon>refresh</mat-icon>
+        {{ 'errors.retry' | transloco }}
+      </button>
+    </div>
+  } @else if (allItems().length === 0) {
+    <app-empty-state
+      [title]="'grocery.empty.title' | transloco"
+      [description]="'grocery.empty.description' | transloco"
+      icon="🛒"
+    />
+  } @else {
+    <div class="grocery-list__content">
+      @if (pendingItems().length > 0) {
+        <div class="grocery-list__section" aria-label="Pending items">
+          @for (item of pendingItems(); track item.id) {
+            <app-grocery-item
+              animate.enter="slide-down"
+              [item]="item"
+              (toggleBought)="onToggleBought($event)"
+              (edit)="onOpenEditForm($event)"
+              (delete)="onDeleteItem($event)"
+            />
+          }
+        </div>
+      }
+
+      @if (boughtItems().length > 0) {
+        <div class="grocery-list__divider" aria-hidden="true">
+          <span>{{ 'grocery.items' | transloco }}</span>
+        </div>
+        <div class="grocery-list__section grocery-list__section--bought" aria-label="Bought items">
+          @for (item of boughtItems(); track item.id) {
+            <app-grocery-item
+              animate.enter="slide-down"
+              [item]="item"
+              (toggleBought)="onToggleBought($event)"
+              (edit)="onOpenEditForm($event)"
+              (delete)="onDeleteItem($event)"
+            />
+          }
+        </div>
+      }
+    </div>
+  }
+</section>

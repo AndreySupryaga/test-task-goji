@@ -1,0 +1,73 @@
+{
+  "app": {
+    "title": "Einkaufsliste"
+  },
+  "header": {
+    "title": "Einkaufsliste"
+  },
+  "grocery": {
+    "title": "Meine Einkaufsliste",
+    "empty": {
+      "title": "Ihre Liste ist leer",
+      "description": "Fügen Sie Ihr erstes Lebensmittel hinzu, um zu beginnen"
+    },
+    "addItem": "Artikel hinzufügen",
+    "editItem": "Artikel bearbeiten",
+    "deleteItem": "Artikel löschen",
+    "actionsFor": "Aktionen für {{ name }}",
+    "confirmDelete": "Möchten Sie diesen Artikel wirklich löschen?",
+    "confirmDeleteDescription": "Diese Aktion kann nicht rückgängig gemacht werden.",
+    "progress": "{{ bought }} von {{ total }} Artikeln gekauft",
+    "allDone": "Alle Artikel gekauft! Gut gemacht!",
+    "items": "Gekaufte Waren"
+  },
+  "form": {
+    "name": "Artikelname",
+    "namePlaceholder": "z.B. Äpfel",
+    "quantity": "Menge",
+    "unit": "Einheit",
+    "unitPlaceholder": "z.B. Stück, kg, l",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "add": "Hinzufügen",
+    "validation": {
+      "nameRequired": "Name ist erforderlich",
+      "nameMinLength": "Name muss mindestens 2 Zeichen lang sein",
+      "quantityRequired": "Menge ist erforderlich",
+      "quantityMin": "Menge muss mindestens 0.1 betragen",
+      "unitRequired": "Einheit ist erforderlich"
+    }
+  },
+  "theme": {
+    "light": "Hell",
+    "dark": "Dunkel",
+    "toggle": "Thema wechseln"
+  },
+  "language": {
+    "select": "Sprache auswählen"
+  },
+  "units": {
+    "pcs": "Stk.",
+    "kg": "kg",
+    "g": "g",
+    "l": "l",
+    "ml": "ml",
+    "pack": "Packung",
+    "bunch": "Bund",
+    "box": "Karton"
+  },
+  "errors": {
+    "loadFailed": "Artikel konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
+    "saveFailed": "Artikel konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+    "deleteFailed": "Artikel konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.",
+    "retry": "Wiederholen",
+    "unexpected": "Ein unerwarteter Fehler ist aufgetreten"
+  },
+  "common": {
+    "yes": "Ja",
+    "no": "Nein",
+    "delete": "Löschen",
+    "cancel": "Abbrechen",
+    "loading": "Laden..."
+  }
+}

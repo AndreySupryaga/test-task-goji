@@ -1,0 +1,25 @@
+.lang-flag {
+  font-size: var(--font-size-lg);
+  margin-right: 0.25rem;
+}
+
+.lang-code {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.lang-select-button {
+  display: flex;
+  align-items: center;
+  color: var(--color-header-text);
+}
+
+button[mat-menu-item] {
+  gap: 0.5rem;
+
+  &.active {
+    font-weight: 600;
+    color: var(--mat-sys-primary);
+  }
+}

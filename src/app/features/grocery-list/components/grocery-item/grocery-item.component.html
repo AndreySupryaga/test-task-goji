@@ -1,0 +1,33 @@
+<div class="grocery-item" [class.grocery-item--bought]="item().bought" role="listitem">
+  <mat-checkbox
+    class="grocery-item__checkbox"
+    [checked]="item().bought"
+    [attr.aria-label]="item().name"
+    (change)="onToggle()"
+  />
+
+  <div class="grocery-item__content">
+    <span class="grocery-item__name">{{ item().name }}</span>
+    <span class="grocery-item__meta">{{ item().quantity }} {{ item().unit }}</span>
+  </div>
+
+  <div class="grocery-item__actions" role="group" [attr.aria-label]="'grocery.actionsFor' | transloco : { name : item().name}">
+    <button
+      mat-icon-button
+      [matTooltip]="'grocery.editItem' | transloco"
+      [attr.aria-label]="'grocery.editItem' | transloco"
+      (click)="onEdit()"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="warn"
+      [matTooltip]="'grocery.deleteItem' | transloco"
+      [attr.aria-label]="'grocery.deleteItem' | transloco"
+      (click)="onDelete()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

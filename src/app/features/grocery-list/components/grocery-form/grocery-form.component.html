@@ -1,0 +1,59 @@
+<form (submit)="onSubmit()" novalidate>
+  <h2 mat-dialog-title>
+    {{ titleText | transloco }}
+  </h2>
+
+  <mat-dialog-content>
+    <div class="grocery-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'form.name' | transloco }}</mat-label>
+        <input
+          matInput
+          [formField]="groceryForm.name"
+          [placeholder]="'form.namePlaceholder' | transloco"
+          autocomplete="off"
+          cdkFocusInitial
+        />
+        @if (groceryForm.name().touched() && groceryForm.name().errors().length) {
+          <mat-error>{{ groceryForm.name().errors()[0].message | transloco }}</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="grocery-form__row">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'form.quantity' | transloco }}</mat-label>
+          <input
+            matInput
+            type="number"
+            step="any"
+            [formField]="groceryForm.quantity"
+          />
+          @if (groceryForm.quantity().touched() && groceryForm.quantity().errors().length) {
+            <mat-error>{{ groceryForm.quantity().errors()[0].message | transloco }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'form.unit' | transloco }}</mat-label>
+          <select matNativeControl [formField]="groceryForm.unit">
+            @for (unit of units; track unit) {
+              <option [value]="unit">{{ 'units.' + unit | transloco }}</option>
+            }
+          </select>
+          @if (groceryForm.unit().touched() && groceryForm.unit().errors().length) {
+            <mat-error>{{ groceryForm.unit().errors()[0].message | transloco }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button type="button" [mat-dialog-close]="null">
+      {{ 'form.cancel' | transloco }}
+    </button>
+    <button mat-flat-button color="primary" type="submit">
+      {{ buttonText | transloco }}
+    </button>
+  </mat-dialog-actions>
+</form>

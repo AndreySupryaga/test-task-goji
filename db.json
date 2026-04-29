@@ -1,0 +1,59 @@
+{
+  "items": [
+    {
+      "name": "Bread",
+      "quantity": 2,
+      "unit": "pcs",
+      "bought": false,
+      "createdAt": "2026-04-29T15:02:11.043Z",
+      "updatedAt": "2026-04-29T15:02:11.043Z",
+      "id": "FjlCEKDZlzI"
+    },
+    {
+      "name": "Pears",
+      "quantity": 1.2,
+      "unit": "kg",
+      "bought": true,
+      "createdAt": "2026-04-29T15:02:31.119Z",
+      "updatedAt": "2026-04-29T15:11:38.772Z",
+      "id": "KDyd9sO2LUo"
+    },
+    {
+      "name": "Meat",
+      "quantity": 1.5,
+      "unit": "kg",
+      "bought": false,
+      "createdAt": "2026-04-29T15:07:24.615Z",
+      "updatedAt": "2026-04-29T15:08:40.789Z",
+      "id": "EE-goUET_r4"
+    },
+    {
+      "name": "Bananas",
+      "quantity": 2,
+      "unit": "kg",
+      "bought": false,
+      "createdAt": "2026-04-29T15:07:42.641Z",
+      "updatedAt": "2026-04-29T15:08:30.922Z",
+      "id": "HlGm_JVIRTY"
+    },
+    {
+      "name": "Milk",
+      "quantity": 1,
+      "unit": "l",
+      "bought": false,
+      "createdAt": "2026-04-29T15:07:49.377Z",
+      "updatedAt": "2026-04-29T15:09:34.757Z",
+      "id": "JfzuwJTEKbU"
+    },
+    {
+      "name": "Ground pepper",
+      "quantity": 10,
+      "unit": "g",
+      "bought": false,
+      "createdAt": "2026-04-29T15:11:27.626Z",
+      "updatedAt": "2026-04-29T15:37:42.502Z",
+      "id": "qDLpajd3eQk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

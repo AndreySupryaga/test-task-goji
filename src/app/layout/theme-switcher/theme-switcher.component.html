@@ -1,0 +1,9 @@
+<button
+  mat-icon-button
+  [matTooltip]="'theme.toggle' | transloco"
+  [attr.aria-label]="'theme.toggle' | transloco"
+  (click)="themeService.toggle()"
+  class="theme-switcher"
+>
+  <mat-icon>{{ themeIcon }}</mat-icon>
+</button>

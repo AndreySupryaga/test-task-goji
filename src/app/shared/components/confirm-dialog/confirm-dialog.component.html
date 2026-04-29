@@ -1,0 +1,15 @@
+<div class="confirm-dialog">
+  <mat-icon class="confirm-dialog__icon" color="warn">warning</mat-icon>
+  <h2 mat-dialog-title>{{ data.titleKey | transloco }}</h2>
+  <mat-dialog-content>
+    <p>{{ data.messageKey | transloco }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button [mat-dialog-close]="false">
+      {{ 'common.cancel' | transloco }}
+    </button>
+    <button mat-flat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>
+      {{ 'common.delete' | transloco }}
+    </button>
+  </mat-dialog-actions>
+</div>

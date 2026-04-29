@@ -1,0 +1,9 @@
+.page {
+  min-height: calc(100vh - 64px);
+  padding: var(--space-8) var(--space-6);
+
+  &__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}

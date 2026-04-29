@@ -1,0 +1,64 @@
+.grocery-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-surface-border);
+  border-radius: 0.75rem;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+
+  &:hover {
+    border-color: var(--mat-sys-primary);
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 0.08);
+
+    .grocery-item__actions {
+      opacity: 1;
+    }
+  }
+
+  &--bought {
+    opacity: 0.6;
+
+    .grocery-item__name {
+      text-decoration: line-through;
+      color: var(--color-bought-text);
+    }
+  }
+
+  &__checkbox {
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  &__name {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 150ms ease;
+  }
+
+  &__meta {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+}

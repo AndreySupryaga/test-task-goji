@@ -1,0 +1,12 @@
+<mat-toolbar class="header" color="primary" role="banner">
+  <div class="header__content">
+    <a class="header__brand" routerLink="/" [attr.aria-label]="'header.title' | transloco">
+      <mat-icon class="header__logo" aria-hidden="true">shopping_cart</mat-icon>
+      <span class="header__title">{{ 'header.title' | transloco }}</span>
+    </a>
+    <nav class="header__actions" aria-label="Global controls">
+      <app-language-switcher />
+      <app-theme-switcher />
+    </nav>
+  </div>
+</mat-toolbar>
