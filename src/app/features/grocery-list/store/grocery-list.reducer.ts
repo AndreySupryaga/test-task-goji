@@ -74,10 +74,9 @@ const reducer = createReducer(
   on(GroceryListActions.toggleBoughtSuccess, (state, { item }) =>
     adapter.updateOne({ id: item.id, changes: item }, state),
   ),
-  on(GroceryListActions.toggleBoughtFailure, (state, { error }) => ({
-    ...state,
-    error,
-  })),
+  on(GroceryListActions.toggleBoughtFailure, (state, { id, previousBought, error }) =>
+    adapter.updateOne({ id, changes: { bought: previousBought } }, { ...state, error }),
+  ),
 );
 
 export const groceryListFeature = createFeature({

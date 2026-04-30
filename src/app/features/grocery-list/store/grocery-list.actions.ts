@@ -28,6 +28,6 @@ export const GroceryListActions = createActionGroup({
 
     'Toggle Bought': props<GroceryItemTogglePayload>(),
     'Toggle Bought Success': props<{ item: GroceryItem }>(),
-    'Toggle Bought Failure': props<{ error: string }>(),
+    'Toggle Bought Failure': props<{ id: string; previousBought: boolean; error: string }>(),
   },
 });

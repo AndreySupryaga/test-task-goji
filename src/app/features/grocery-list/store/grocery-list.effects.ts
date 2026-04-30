@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
+import { catchError, concatMap, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 
 import { GroceryApiService } from '@features/grocery-list/services';
 
@@ -72,11 +72,17 @@ export class GroceryListEffects {
   toggleBought$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GroceryListActions.toggleBought),
-      exhaustMap(({ id, bought }) =>
+      concatMap(({ id, bought }) =>
         this.api.update({ id, bought }).pipe(
           map((item) => GroceryListActions.toggleBoughtSuccess({ item })),
           catchError((error: Error) =>
-            of(GroceryListActions.toggleBoughtFailure({ error: error.message })),
+            of(
+              GroceryListActions.toggleBoughtFailure({
+                id,
+                previousBought: !bought,
+                error: error.message,
+              }),
+            ),
           ),
         ),
       ),

@@ -120,5 +120,20 @@ describe('GroceryListEffects', () => {
         expect(action).toEqual(GroceryListActions.toggleBoughtSuccess({ item: toggled }));
       });
     });
+
+    it('dispatches toggleBoughtFailure with rollback data on error', () => {
+      vi.spyOn(apiService, 'update').mockReturnValue(throwError(() => new Error('Toggle failed')));
+      actions$ = of(GroceryListActions.toggleBought({ id: '1', bought: true }));
+
+      effects.toggleBought$.subscribe((action) => {
+        expect(action).toEqual(
+          GroceryListActions.toggleBoughtFailure({
+            id: '1',
+            previousBought: false,
+            error: 'Toggle failed',
+          }),
+        );
+      });
+    });
   });
 });

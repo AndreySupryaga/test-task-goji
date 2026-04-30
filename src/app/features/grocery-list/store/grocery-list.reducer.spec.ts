@@ -155,16 +155,20 @@ describe('GroceryList Reducer', () => {
   });
 
   describe('toggleBoughtFailure', () => {
-    it('sets error but does NOT revert optimistic update in reducer (logic in effects)', () => {
+    it('sets error and reverts the optimistic bought status', () => {
       const stateWithItem = adapter.addOne(mockItem, initialState);
-      // First optimistic update
       const stateAfterToggle = reducer(stateWithItem, GroceryListActions.toggleBought({ id: '1', bought: true }));
-      // Then failure
-      const stateAfterFailure = reducer(stateAfterToggle, GroceryListActions.toggleBoughtFailure({ error: 'Toggle failed' }));
+      const stateAfterFailure = reducer(
+        stateAfterToggle,
+        GroceryListActions.toggleBoughtFailure({
+          id: '1',
+          previousBought: false,
+          error: 'Toggle failed',
+        }),
+      );
       
       expect(stateAfterFailure.error).toBe('Toggle failed');
-      // Reducer doesn't know previous state, so it stays true. Revert is handled by another toggleBought action from effects.
-      expect(stateAfterFailure.entities['1']?.bought).toBe(true);
+      expect(stateAfterFailure.entities['1']?.bought).toBe(false);
     });
   });
 });
