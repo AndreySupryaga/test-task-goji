@@ -80,6 +80,7 @@ The API endpoint used by the app is `http://localhost:3000/items`.
 - **Language switcher** — English, German, Ukrainian with localStorage persistence
 - **Error state** with retry action
 - **Loading indicators** with accessible ARIA live regions
+- **Close/hide bought items** — You can close the bought items by clicking the "Purchased goods" button.
 
 
 ## Architecture
