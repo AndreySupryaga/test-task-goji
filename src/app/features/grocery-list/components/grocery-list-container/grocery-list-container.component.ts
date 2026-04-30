@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslocoModule } from '@jsverse/transloco';
 import { Store } from '@ngrx/store';
+import { filter } from 'rxjs';
 
 import {
   ConfirmDialogComponent,
@@ -12,11 +13,18 @@ import {
 import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 
-import { GroceryItem, GroceryItemTogglePayload } from '@features/grocery-list/entities/models';
+import {
+  GroceryItem,
+  GroceryItemCreatePayload,
+  GroceryItemTogglePayload,
+} from '@features/grocery-list/entities/models';
 import { GroceryListActions } from '@features/grocery-list/store/grocery-list.actions';
 import { groceryListFeature } from '@features/grocery-list/store/grocery-list.reducer';
 import { GroceryItemComponent } from '@features/grocery-list/components/grocery-item/grocery-item.component';
-import { GroceryFormComponent } from '@features/grocery-list/components/grocery-form/grocery-form.component';
+import {
+  GroceryFormComponent,
+  GroceryFormDialogData,
+} from '@features/grocery-list/components/grocery-form/grocery-form.component';
 
 @Component({
   selector: 'app-grocery-list-container',
@@ -69,6 +77,7 @@ export class GroceryListContainerComponent {
     this.dialog
       .open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, { data })
       .afterClosed()
+      .pipe(filter(Boolean))
       .subscribe((confirmed) => {
         if (confirmed) this.store.dispatch(GroceryListActions.deleteItem({ id }));
       });
@@ -83,6 +92,12 @@ export class GroceryListContainerComponent {
   }
 
   private openFormDialog(item?: GroceryItem) {
-    return this.dialog.open(GroceryFormComponent, { data: { item: item || null } }).afterClosed();
+    return this.dialog
+      .open<GroceryFormComponent, GroceryFormDialogData, GroceryItemCreatePayload | null>(
+        GroceryFormComponent,
+        { data: { item: item || null } },
+      )
+      .afterClosed()
+      .pipe(filter(Boolean));
   }
 }
