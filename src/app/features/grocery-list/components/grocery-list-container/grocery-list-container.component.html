@@ -57,9 +57,21 @@
       }
 
       @if (boughtItems().length > 0) {
-        <div class="grocery-list__divider" aria-hidden="true" (click)="showBoughtItems = !showBoughtItems">
-          <span class="cursor-pointer">{{ 'grocery.items' | transloco }}</span>
-        </div>
+        <button
+          type="button"
+          class="grocery-list__divider"
+          [attr.aria-expanded]="showBoughtItems"
+          (click)="showBoughtItems = !showBoughtItems"
+        >
+          <span>{{ 'grocery.items' | transloco }}</span>
+          <mat-icon
+            class="grocery-list__divider-icon"
+            [class.grocery-list__divider-icon--open]="showBoughtItems"
+            aria-hidden="true"
+          >
+            expand_more
+          </mat-icon>
+        </button>
         @if (showBoughtItems) {
           <div class="grocery-list__section grocery-list__section--bought" aria-label="Bought items">
             @for (item of boughtItems(); track item.id) {
