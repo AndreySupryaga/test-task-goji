@@ -7,7 +7,7 @@
           @if (boughtCount() === totalCount()) {
             {{ 'grocery.allDone' | transloco }}
           } @else {
-            {{'grocery.progress' | transloco: { bought: boughtCount(), total: totalCount() } }}
+            {{ 'grocery.progress' | transloco: { bought: boughtCount(), total: totalCount() } }}
           }
         </p>
       }
@@ -57,20 +57,22 @@
       }
 
       @if (boughtItems().length > 0) {
-        <div class="grocery-list__divider" aria-hidden="true">
-          <span>{{ 'grocery.items' | transloco }}</span>
+        <div class="grocery-list__divider" aria-hidden="true" (click)="showBoughtItems = !showBoughtItems">
+          <span class="cursor-pointer">{{ 'grocery.items' | transloco }}</span>
         </div>
-        <div class="grocery-list__section grocery-list__section--bought" aria-label="Bought items">
-          @for (item of boughtItems(); track item.id) {
-            <app-grocery-item
-              animate.enter="slide-down"
-              [item]="item"
-              (toggleBought)="onToggleBought($event)"
-              (edit)="onOpenEditForm($event)"
-              (delete)="onDeleteItem($event)"
-            />
-          }
-        </div>
+        @if (showBoughtItems) {
+          <div class="grocery-list__section grocery-list__section--bought" aria-label="Bought items">
+            @for (item of boughtItems(); track item.id) {
+              <app-grocery-item
+                animate.enter="slide-down"
+                [item]="item"
+                (toggleBought)="onToggleBought($event)"
+                (edit)="onOpenEditForm($event)"
+                (delete)="onDeleteItem($event)"
+              />
+            }
+          </div>
+        }
       }
     </div>
   }

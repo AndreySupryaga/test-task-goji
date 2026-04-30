@@ -44,6 +44,8 @@ export class GroceryListContainerComponent {
   readonly totalCount = this.store.selectSignal(groceryListFeature.selectTotalCount);
   readonly boughtCount = this.store.selectSignal(groceryListFeature.selectBoughtCount);
 
+  protected showBoughtItems = true;
+
   onOpenAddForm() {
     this.openFormDialog().subscribe((payload) => {
       payload && this.store.dispatch(GroceryListActions.addItem({ payload }));
