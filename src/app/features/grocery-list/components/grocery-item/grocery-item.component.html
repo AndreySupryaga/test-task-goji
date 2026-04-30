@@ -8,7 +8,7 @@
 
   <div class="grocery-item__content">
     <span class="grocery-item__name">{{ item().name }}</span>
-    <span class="grocery-item__meta">{{ item().quantity }} {{ item().unit }}</span>
+    <span class="grocery-item__meta">{{ item().quantity }} {{ 'units.' + item().unit | transloco }}</span>
   </div>
 
   <div class="grocery-item__actions" role="group" [attr.aria-label]="'grocery.actionsFor' | transloco : { name : item().name}">
