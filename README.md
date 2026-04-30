@@ -6,6 +6,12 @@ A grocery list application built with Angular 21, NgRx, Angular Material, Transl
 
 **The deployed project is available here: [https://test-task-goji.vercel.app/](https://test-task-goji.vercel.app/)**
 
+## CI/CD Deployment
+
+**The project is connected to Vercel with automatic deployment from the `main` branch.**
+
+Every change pushed or merged into `main` triggers a new Vercel build and deploy, so the live project link always points to the latest deployed version.
+
 ## Tech Stack
 
 | Concern | Technology |
@@ -62,7 +68,7 @@ The API endpoint used by the app is `http://localhost:3000/items`.
 | `npm start` | Starts the Angular dev server |
 | `npm run api` | Starts JSON-server with `db.json` on port 3000 |
 | `npm run dev` | Starts the API and Angular app together |
-| `npm run build` | Builds the production app |
+| `npm run build` | Builds the production app used by Vercel deployment |
 | `npm run watch` | Builds in watch mode with the development configuration |
 | `npm test` | Runs unit tests |
 | `npm run test:coverage` | Runs unit tests with coverage |
@@ -214,5 +220,6 @@ src/
 
 - The app uses Angular Material for dialogs, form fields, buttons, icons, checkboxes, menus, toolbars, tooltips, and snackbars.
 - Toggle bought is optimistic in the reducer. A failed toggle records an error and shows a snackbar, but it does not currently revert the previous local state.
-- The API base URL is currently `http://localhost:3000` in `src/app/core/constants/api.constants.ts`.
+- The local API base URL is `http://localhost:3000`; the deployed production build uses the Vercel API route at `/api`.
+- CI/CD is configured through Vercel: updates to `main` automatically trigger a new production deployment.
 - The JSON-server database is local development data and may change while testing the app.
