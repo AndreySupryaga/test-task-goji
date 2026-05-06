@@ -98,7 +98,23 @@ export default async function handler(req, res) {
     const { id } = route;
 
     if (req.method === 'GET' && !id) {
-      sendJson(res, 200, store.items);
+      const requestUrl = new URL(req.url ?? '/', 'https://placeholder.local');
+      const params = requestUrl.searchParams;
+
+      let items = store.items;
+
+      if (params.has('bought')) {
+        const boughtFilter = params.get('bought') === 'true';
+        items = items.filter((item) => item.bought === boughtFilter);
+      }
+
+      const nameContains = params.get('name:contains');
+      if (nameContains) {
+        const lower = nameContains.toLowerCase();
+        items = items.filter((item) => item.name.toLowerCase().includes(lower));
+      }
+
+      sendJson(res, 200, items);
       return;
     }
 
