@@ -14,6 +14,7 @@ export const GroceryListActions = createActionGroup({
     'Load Items Success': props<{ items: GroceryItem[] }>(),
     'Load Items Failure': props<{ error: string }>(),
     'Search': props<{ value: string }>(),
+    'Set Tab': props<{ tab: 'pending' | 'bought' }>(),
 
     'Add Item': props<{ payload: GroceryItemCreatePayload }>(),
     'Add Item Success': props<{ item: GroceryItem }>(),

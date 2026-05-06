@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@ang
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 import { TranslocoModule } from '@jsverse/transloco';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
@@ -25,7 +26,7 @@ import {
   GroceryFormComponent,
   GroceryFormDialogData,
 } from '@features/grocery-list/components/grocery-form/grocery-form.component';
-import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { form, FormField } from '@angular/forms/signals';
 
 @Component({
@@ -33,11 +34,11 @@ import { form, FormField } from '@angular/forms/signals';
   imports: [
     MatButtonModule,
     MatIconModule,
+    MatTabsModule,
     TranslocoModule,
     GroceryItemComponent,
     LoaderComponent,
     EmptyStateComponent,
-    MatError,
     MatFormField,
     MatInput,
     MatLabel,
@@ -51,25 +52,23 @@ export class GroceryListContainerComponent {
   private readonly store = inject(Store);
   private readonly dialog = inject(MatDialog);
 
-  readonly allItems = this.store.selectSignal(groceryListFeature.selectAll);
+  readonly items = this.store.selectSignal(groceryListFeature.selectAll);
   readonly loading = this.store.selectSignal(groceryListFeature.selectLoading);
   readonly error = this.store.selectSignal(groceryListFeature.selectError);
-  readonly pendingItems = this.store.selectSignal(groceryListFeature.selectPendingItems);
-  readonly boughtItems = this.store.selectSignal(groceryListFeature.selectBoughtItems);
-  readonly totalCount = this.store.selectSignal(groceryListFeature.selectTotalCount);
-  readonly boughtCount = this.store.selectSignal(groceryListFeature.selectBoughtCount);
-
-  protected showBoughtItems = true;
+  readonly activeTab = this.store.selectSignal(groceryListFeature.selectActiveTab);
 
   protected readonly model = signal({ search: '' });
-
   protected readonly form = form(this.model);
 
   constructor() {
     effect(() => {
-      console.log(this.model().search);
       this.store.dispatch(GroceryListActions.search({ value: this.model().search }));
     });
+  }
+
+  onTabChange(index: number) {
+    const tab: 'pending' | 'bought' = index === 0 ? 'pending' : 'bought';
+    this.store.dispatch(GroceryListActions.setTab({ tab }));
   }
 
   onOpenAddForm() {

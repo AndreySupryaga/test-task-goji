@@ -18,8 +18,10 @@ export class GroceryApiService {
     return this.http.get<GroceryItem[]>(this.endpoint);
   }
 
-  searchItems(value: string): Observable<GroceryItem[]> {
-    return this.http.get<GroceryItem[]>(`${this.endpoint}?name:contains=${value}`);
+  searchItems(value: string, bought: boolean): Observable<GroceryItem[]> {
+    const parts = [`bought=${bought}`];
+    if (value) parts.push(`name:contains=${value}`);
+    return this.http.get<GroceryItem[]>(`${this.endpoint}?${parts.join('&')}`);
   }
 
   create(payload: GroceryItemCreatePayload): Observable<GroceryItem> {

@@ -19,7 +19,11 @@
     "confirmDeleteDescription": "Diese Aktion kann nicht rückgängig gemacht werden.",
     "progress": "{{ bought }} von {{ total }} Artikeln gekauft",
     "allDone": "Alle Artikel gekauft! Gut gemacht!",
-    "items": "Gekaufte Waren"
+    "items": "Gekaufte Waren",
+    "tabs": {
+      "pending": "Einkaufen",
+      "bought": "Gekauft"
+    }
   },
   "form": {
     "name": "Artikelname",

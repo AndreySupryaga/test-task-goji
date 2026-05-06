@@ -19,7 +19,11 @@
     "confirmDeleteDescription": "This action cannot be undone.",
     "progress": "{{ bought }} of {{ total }} items bought",
     "allDone": "All items bought! Great job!",
-    "items": "Purchased goods"
+    "items": "Purchased goods",
+    "tabs": {
+      "pending": "To Buy",
+      "bought": "Bought"
+    }
   },
   "form": {
     "name": "Item Name",

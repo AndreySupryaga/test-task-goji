@@ -1,23 +1,40 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, debounceTime, exhaustMap, map, of, switchMap, tap } from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  debounceTime,
+  exhaustMap,
+  map,
+  of,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs';
 
 import { GroceryApiService } from '@features/grocery-list/services';
 
 import { GroceryListActions } from './grocery-list.actions';
+import { groceryListFeature } from './grocery-list.reducer';
 
 @Injectable()
 export class GroceryListEffects {
   private readonly actions$ = inject(Actions);
   private readonly api = inject(GroceryApiService);
+  private readonly store = inject(Store);
   private readonly snackBar = inject(MatSnackBar);
 
   loadItems$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GroceryListActions.loadItems),
-      switchMap(() =>
-        this.api.getAll().pipe(
+      withLatestFrom(
+        this.store.select(groceryListFeature.selectSearch),
+        this.store.select(groceryListFeature.selectActiveTab),
+      ),
+      switchMap(([, search, activeTab]) =>
+        this.api.searchItems(search, activeTab === 'bought').pipe(
           map((items) => GroceryListActions.loadItemsSuccess({ items })),
           catchError((error: Error) =>
             of(GroceryListActions.loadItemsFailure({ error: error.message })),
@@ -31,8 +48,24 @@ export class GroceryListEffects {
     this.actions$.pipe(
       ofType(GroceryListActions.search),
       debounceTime(300),
-      switchMap(({value}) =>
-        this.api.searchItems(value).pipe(
+      withLatestFrom(this.store.select(groceryListFeature.selectActiveTab)),
+      switchMap(([{ value }, activeTab]) =>
+        this.api.searchItems(value, activeTab === 'bought').pipe(
+          map((items) => GroceryListActions.loadItemsSuccess({ items })),
+          catchError((error: Error) =>
+            of(GroceryListActions.loadItemsFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  setTab$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroceryListActions.setTab),
+      withLatestFrom(this.store.select(groceryListFeature.selectSearch)),
+      switchMap(([{ tab }, search]) =>
+        this.api.searchItems(search, tab === 'bought').pipe(
           map((items) => GroceryListActions.loadItemsSuccess({ items })),
           catchError((error: Error) =>
             of(GroceryListActions.loadItemsFailure({ error: error.message })),
