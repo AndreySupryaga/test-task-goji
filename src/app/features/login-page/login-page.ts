@@ -1,9 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatButton } from '@angular/material/button';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-login-page',
-  imports: [],
+  imports: [MatButton, TranslocoPipe],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })
