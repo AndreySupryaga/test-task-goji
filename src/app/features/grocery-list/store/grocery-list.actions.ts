@@ -6,6 +6,7 @@ import {
   GroceryItemTogglePayload,
   GroceryItemUpdatePayload,
 } from '@features/grocery-list/entities/models';
+import { GroceryTab } from '@features/grocery-list/entities/constants';
 
 export const GroceryListActions = createActionGroup({
   source: 'Grocery List',
@@ -14,7 +15,7 @@ export const GroceryListActions = createActionGroup({
     'Load Items Success': props<{ items: GroceryItem[] }>(),
     'Load Items Failure': props<{ error: string }>(),
     'Search': props<{ value: string }>(),
-    'Set Tab': props<{ tab: 'pending' | 'bought' }>(),
+    'Set Tab': props<{ tab: GroceryTab }>(),
 
     'Add Item': props<{ payload: GroceryItemCreatePayload }>(),
     'Add Item Success': props<{ item: GroceryItem }>(),

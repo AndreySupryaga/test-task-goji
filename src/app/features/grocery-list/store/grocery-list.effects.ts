@@ -15,6 +15,7 @@ import {
 } from 'rxjs';
 
 import { GroceryApiService } from '@features/grocery-list/services';
+import { GroceryTab } from '@features/grocery-list/entities/constants';
 
 import { GroceryListActions } from './grocery-list.actions';
 import { groceryListFeature } from './grocery-list.reducer';
@@ -34,7 +35,7 @@ export class GroceryListEffects {
         this.store.select(groceryListFeature.selectActiveTab),
       ),
       switchMap(([, search, activeTab]) =>
-        this.api.searchItems(search, activeTab === 'bought').pipe(
+        this.api.searchItems(search, activeTab === GroceryTab.BOUGHT).pipe(
           map((items) => GroceryListActions.loadItemsSuccess({ items })),
           catchError((error: Error) =>
             of(GroceryListActions.loadItemsFailure({ error: error.message })),
@@ -50,7 +51,7 @@ export class GroceryListEffects {
       debounceTime(300),
       withLatestFrom(this.store.select(groceryListFeature.selectActiveTab)),
       switchMap(([{ value }, activeTab]) =>
-        this.api.searchItems(value, activeTab === 'bought').pipe(
+        this.api.searchItems(value, activeTab === GroceryTab.BOUGHT).pipe(
           map((items) => GroceryListActions.loadItemsSuccess({ items })),
           catchError((error: Error) =>
             of(GroceryListActions.loadItemsFailure({ error: error.message })),
@@ -65,7 +66,7 @@ export class GroceryListEffects {
       ofType(GroceryListActions.setTab),
       withLatestFrom(this.store.select(groceryListFeature.selectSearch)),
       switchMap(([{ tab }, search]) =>
-        this.api.searchItems(search, tab === 'bought').pipe(
+        this.api.searchItems(search, tab === GroceryTab.BOUGHT).pipe(
           map((items) => GroceryListActions.loadItemsSuccess({ items })),
           catchError((error: Error) =>
             of(GroceryListActions.loadItemsFailure({ error: error.message })),

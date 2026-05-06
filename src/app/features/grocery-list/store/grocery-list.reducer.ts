@@ -2,6 +2,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 
 import { GroceryItem } from '@features/grocery-list/entities/models';
+import { GroceryTab } from '@features/grocery-list/entities/constants';
 
 import { GroceryListActions } from './grocery-list.actions';
 
@@ -9,7 +10,7 @@ export interface GroceryListState extends EntityState<GroceryItem> {
   loading: boolean;
   submitting: boolean;
   error: string | null;
-  activeTab: 'pending' | 'bought';
+  activeTab: GroceryTab;
   search: string;
 }
 
@@ -21,12 +22,12 @@ const initialState: GroceryListState = adapter.getInitialState({
   loading: false,
   submitting: false,
   error: null,
-  activeTab: 'pending' as 'pending' | 'bought',
+  activeTab: GroceryTab.PENDING,
   search: '',
 });
 
-const itemBelongsToTab = (item: GroceryItem, tab: 'pending' | 'bought'): boolean =>
-  tab === 'bought' ? item.bought : !item.bought;
+const itemBelongsToTab = (item: GroceryItem, tab: GroceryTab): boolean =>
+  tab === GroceryTab.BOUGHT ? item.bought : !item.bought;
 
 const reducer = createReducer(
   initialState,

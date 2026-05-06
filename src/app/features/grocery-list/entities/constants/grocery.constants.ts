@@ -1,3 +1,8 @@
+export enum GroceryTab {
+  PENDING = 'pending',
+  BOUGHT = 'bought',
+}
+
 export enum GroceryUnit {
   PIECES = 'pcs',
   KILOGRAMS = 'kg',

@@ -5,7 +5,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-login-page',
-  imports: [MatButton, TranslocoPipe],
+  imports: [MatButton],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })

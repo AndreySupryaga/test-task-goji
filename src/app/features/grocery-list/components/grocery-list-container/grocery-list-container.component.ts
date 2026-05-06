@@ -19,6 +19,7 @@ import {
   GroceryItemCreatePayload,
   GroceryItemTogglePayload,
 } from '@features/grocery-list/entities/models';
+import { GroceryTab } from '@features/grocery-list/entities/constants';
 import { GroceryListActions } from '@features/grocery-list/store/grocery-list.actions';
 import { groceryListFeature } from '@features/grocery-list/store/grocery-list.reducer';
 import { GroceryItemComponent } from '@features/grocery-list/components/grocery-item/grocery-item.component';
@@ -67,7 +68,7 @@ export class GroceryListContainerComponent {
   }
 
   onTabChange(index: number) {
-    const tab: 'pending' | 'bought' = index === 0 ? 'pending' : 'bought';
+    const tab = index === 0 ? GroceryTab.PENDING : GroceryTab.BOUGHT;
     this.store.dispatch(GroceryListActions.setTab({ tab }));
   }
 
