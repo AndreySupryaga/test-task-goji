@@ -1,5 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { form, FormField, min, minLength, required, submit } from '@angular/forms/signals';
+import {
+  form,
+  FormField,
+  min,
+  minLength,
+  required,
+  submit,
+  validate,
+} from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -54,6 +62,12 @@ export class GroceryFormComponent {
     required(s.quantity, { message: 'form.validation.quantityRequired' });
     min(s.quantity, 0.1, { message: 'form.validation.quantityMin' });
     required(s.unit, { message: 'form.validation.unitRequired' });
+    validate(s.name, ({ value }) => {
+      if (!value().trim()) {
+        return { kind: 'custom', message: 'form.validation.nameRequired' };
+      }
+      return null;
+    });
   });
 
   onSubmit(): boolean {

@@ -7,6 +7,10 @@ export const routes: Routes = [
       import('./features/grocery-list/grocery-list.routes').then((m) => m.groceryListRoutes),
   },
   {
+    path: 'login',
+    loadComponent: () => import('./features/login-page/login-page').then((m) => m.LoginPage),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

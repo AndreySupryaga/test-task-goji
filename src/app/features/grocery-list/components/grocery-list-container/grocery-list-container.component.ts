@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,6 +25,8 @@ import {
   GroceryFormComponent,
   GroceryFormDialogData,
 } from '@features/grocery-list/components/grocery-form/grocery-form.component';
+import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import { form, FormField } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-grocery-list-container',
@@ -35,6 +37,11 @@ import {
     GroceryItemComponent,
     LoaderComponent,
     EmptyStateComponent,
+    MatError,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    FormField,
   ],
   templateUrl: './grocery-list-container.component.html',
   styleUrl: './grocery-list-container.component.scss',
@@ -53,6 +60,17 @@ export class GroceryListContainerComponent {
   readonly boughtCount = this.store.selectSignal(groceryListFeature.selectBoughtCount);
 
   protected showBoughtItems = true;
+
+  protected readonly model = signal({ search: '' });
+
+  protected readonly form = form(this.model);
+
+  constructor() {
+    effect(() => {
+      console.log(this.model().search);
+      this.store.dispatch(GroceryListActions.search({ value: this.model().search }));
+    });
+  }
 
   onOpenAddForm() {
     this.openFormDialog().subscribe((payload) => {

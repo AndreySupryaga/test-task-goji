@@ -23,6 +23,17 @@
       {{ 'grocery.addItem' | transloco }}
     </button>
   </div>
+  <form novalidate>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>{{ 'form.name' | transloco }}</mat-label>
+    <input
+      matInput
+      [formField]="form.search"
+      autocomplete="off"
+      cdkFocusInitial
+    />
+  </mat-form-field>
+  </form>
 
   @if (loading()) {
     <app-loader />

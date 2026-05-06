@@ -13,6 +13,7 @@ export const GroceryListActions = createActionGroup({
     'Load Items': emptyProps(),
     'Load Items Success': props<{ items: GroceryItem[] }>(),
     'Load Items Failure': props<{ error: string }>(),
+    'Search': props<{ value: string }>(),
 
     'Add Item': props<{ payload: GroceryItemCreatePayload }>(),
     'Add Item Success': props<{ item: GroceryItem }>(),

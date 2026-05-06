@@ -5,6 +5,7 @@ import { GroceryListActions } from '@features/grocery-list/store/grocery-list.ac
 import {
   GroceryListContainerComponent
 } from '@features/grocery-list/components/grocery-list-container/grocery-list-container.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-grocery-list-page',
@@ -15,8 +16,13 @@ import {
 })
 export class GroceryListPageComponent {
   private readonly store = inject(Store);
+  router = inject(Router);
 
   constructor() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+      this.router.navigate(['/login']);
+    }
     this.store.dispatch(GroceryListActions.loadItems());
   }
 }

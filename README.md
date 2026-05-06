@@ -219,7 +219,7 @@ src/
 ## Notes
 
 - The app uses Angular Material for dialogs, form fields, buttons, icons, checkboxes, menus, toolbars, tooltips, and snackbars.
-- Toggle bought is optimistic in the reducer. A failed toggle records an error and shows a snackbar, but it does not currently revert the previous local state.
+- Toggle bought is optimistic in the reducer. A failed toggle rolls back to the previous local state and shows a snackbar.
 - The local API base URL is `http://localhost:3000`; the deployed production build uses the Vercel API route at `/api`.
 - CI/CD is configured through Vercel: updates to `main` automatically trigger a new production deployment.
 - The JSON-server database is local development data and may change while testing the app.

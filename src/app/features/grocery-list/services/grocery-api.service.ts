@@ -18,6 +18,10 @@ export class GroceryApiService {
     return this.http.get<GroceryItem[]>(this.endpoint);
   }
 
+  searchItems(value: string): Observable<GroceryItem[]> {
+    return this.http.get<GroceryItem[]>(`${this.endpoint}?name:contains=${value}`);
+  }
+
   create(payload: GroceryItemCreatePayload): Observable<GroceryItem> {
     const now = new Date().toISOString();
     return this.http.post<GroceryItem>(this.endpoint, {

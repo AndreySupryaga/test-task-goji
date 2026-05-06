@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, exhaustMap, map, of, switchMap, tap } from 'rxjs';
+import { catchError, concatMap, debounceTime, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 
 import { GroceryApiService } from '@features/grocery-list/services';
 
@@ -18,6 +18,21 @@ export class GroceryListEffects {
       ofType(GroceryListActions.loadItems),
       switchMap(() =>
         this.api.getAll().pipe(
+          map((items) => GroceryListActions.loadItemsSuccess({ items })),
+          catchError((error: Error) =>
+            of(GroceryListActions.loadItemsFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  searchItems$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroceryListActions.search),
+      debounceTime(300),
+      switchMap(({value}) =>
+        this.api.searchItems(value).pipe(
           map((items) => GroceryListActions.loadItemsSuccess({ items })),
           catchError((error: Error) =>
             of(GroceryListActions.loadItemsFailure({ error: error.message })),

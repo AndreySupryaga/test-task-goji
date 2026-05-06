@@ -53,6 +53,15 @@
       "createdAt": "2026-04-29T15:11:27.626Z",
       "updatedAt": "2026-04-29T15:37:42.502Z",
       "id": "qDLpajd3eQk"
+    },
+    {
+      "name": "      ",
+      "quantity": 1,
+      "unit": "pcs",
+      "bought": false,
+      "createdAt": "2026-05-06T10:05:04.734Z",
+      "updatedAt": "2026-05-06T10:05:04.734Z",
+      "id": "EtMrdUMe1pI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
